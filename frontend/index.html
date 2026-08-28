@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Archive — Document Intelligence &amp; RAG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR / "CATALOG" ============ -->
+  <aside class="catalog">
+    <div class="catalog__brand">
+      <div class="catalog__mark">A</div>
+      <div>
+        <div class="catalog__title">Archive</div>
+        <div class="catalog__subtitle">Document Intelligence &amp; RAG</div>
+      </div>
+    </div>
+
+    <section class="catalog__section">
+      <!-- <label class="catalog__label">API key</label> -->
+      <!-- <div class="catalog__api-status">
+        <div class="catalog__api-status-badge">Server-side</div>
+        <p class="catalog__hint">
+          Uses the API key from your .env file on the server.
+          If the key is missing or quota is reached, the app will ask for a temporary override key.
+        </p>
+      </div> -->
+      <div id="keyStatus" class="key-status"></div>
+    </section>
+
+    <section class="catalog__section">
+      <label class="catalog__label">Upload a document</label>
+      <div id="dropzone" class="dropzone">
+        <div class="dropzone__icon">⇪</div>
+        <div class="dropzone__text">Drop a PDF, DOCX or TXT here<br/>or click to browse</div>
+        <input id="fileInput" type="file" accept=".pdf,.docx,.txt,.md" hidden />
+      </div>
+      <div id="uploadProgress" class="upload-progress hidden">
+        <div class="upload-progress__bar"><span id="uploadProgressBar"></span></div>
+        <div id="uploadProgressLabel" class="upload-progress__label">Extracting…</div>
+      </div>
+    </section>
+
+    <section class="catalog__section catalog__section--grow">
+      <div class="catalog__label-row">
+        <label class="catalog__label">Indexed documents</label>
+        <span id="docCount" class="doc-count">0</span>
+      </div>
+      <div id="docList" class="doc-list">
+        <div class="doc-list__empty">No documents yet. Upload one above to get started.</div>
+      </div>
+    </section>
+
+    <footer class="catalog__footer">
+      Local embeddings (bge-small) · API-backed classification &amp; chat
+    </footer>
+  </aside>
+
+  <!-- ============ MAIN / CHAT ============ -->
+  <main class="workspace">
+
+    <header class="workspace__header">
+      <div>
+        <h1>Ask your documents</h1>
+        <p class="workspace__subtitle">Answers are grounded only in what you've uploaded, with cited sources below each reply.</p>
+      </div>
+      <div class="scope-picker">
+        <label for="scopeSelect">Search in</label>
+        <select id="scopeSelect">
+          <option value="all">All documents</option>
+        </select>
+      </div>
+    </header>
+
+    <div id="chatLog" class="chat-log">
+      <div class="chat-welcome">
+        <div class="chat-welcome__stamp">RAG</div>
+        <h2>Retrieval-grounded answers, cited line by line</h2>
+        <p>Upload a document on the left, then ask a question. Every answer below traces back to the exact
+          passages it was built from — click a source card to open the excerpt.</p>
+        <div class="chat-welcome__examples">
+          <button class="example-chip" data-example="What type of document is this?">What type of document is this?</button>
+          <button class="example-chip" data-example="Summarize the key points in 3 bullets.">Summarize the key points</button>
+          <button class="example-chip" data-example="What dates, amounts or names are mentioned?">Find dates, amounts or names</button>
+        </div>
+      </div>
+    </div>
+
+    <form id="chatForm" class="chat-input-bar">
+      <input id="chatInput" type="text" placeholder="Ask a question about your documents…" autocomplete="off" />
+      <button id="chatSend" type="submit">
+        <span>Ask</span>
+      </button>
+    </form>
+  </main>
+
+</div>
+
+<template id="sourceCardTemplate">
+  <button class="source-card" type="button">
+    <div class="source-card__index"></div>
+    <div class="source-card__body">
+      <div class="source-card__filename"></div>
+      <div class="source-card__snippet"></div>
+    </div>
+    <div class="source-card__score"></div>
+  </button>
+</template>
+
+<div id="excerptModal" class="modal hidden">
+  <div class="modal__backdrop"></div>
+  <div class="modal__panel">
+    <button id="excerptModalClose" class="modal__close" type="button">×</button>
+    <div id="excerptModalTitle" class="modal__title"></div>
+    <div id="excerptModalBody" class="modal__body"></div>
+  </div>
+</div>
+
+<div id="apiKeyModal" class="modal hidden">
+  <div class="modal__backdrop"></div>
+  <div class="modal__panel modal__panel--compact">
+    <button id="apiKeyModalClose" class="modal__close" type="button">×</button>
+    <div class="modal__title">Missing API key</div>
+    <p id="apiKeyModalMessage" class="modal__body modal__body--tight">
+      Enter a new API key to continue.
+    </p>
+    <form id="apiKeyModalForm" class="api-key-form">
+      <input id="apiKeyModalInput" type="password" placeholder="gsk_..." autocomplete="off" spellcheck="false" />
+      <div class="api-key-form__actions">
+        <button id="apiKeyModalCancel" class="secondary-btn" type="button">Cancel</button>
+        <button class="primary-btn" type="submit">Use key</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

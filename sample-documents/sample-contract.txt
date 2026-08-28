@@ -1,0 +1,40 @@
+SERVICE AGREEMENT
+
+This Service Agreement ("Agreement") is entered into as of March 3, 2026, between
+Northwind Consulting LLC ("Provider") and Bramble Retail Group Inc. ("Client").
+
+1. SCOPE OF SERVICES
+Provider agrees to deliver a customer analytics dashboard, including data pipeline
+integration, a web-based reporting interface, and monthly performance reviews.
+Implementation will occur in three phases: Discovery (2 weeks), Build (6 weeks),
+and Rollout (2 weeks), for a total estimated timeline of 10 weeks from the
+Effective Date.
+
+2. FEES AND PAYMENT
+The total contract value is $84,500 USD, payable in three installments:
+$28,000 upon signing, $34,000 upon completion of the Build phase, and $22,500
+upon final acceptance. Invoices are due within 30 days of receipt. Late payments
+accrue interest at 1.5% per month.
+
+3. TERM AND TERMINATION
+This Agreement commences on the Effective Date and continues until all Services
+are delivered and accepted, unless terminated earlier. Either party may terminate
+with 30 days' written notice. Client may terminate for cause immediately if
+Provider fails to cure a material breach within 15 days of written notice.
+
+4. CONFIDENTIALITY
+Both parties agree to keep confidential all proprietary information disclosed
+during the engagement for a period of 3 years following termination.
+
+5. KEY CONTACTS
+Provider Project Lead: Maria Chen, mchen@northwindconsulting.example
+Client Sponsor: David Okafor, Director of Operations, Bramble Retail Group Inc.
+
+6. GOVERNING LAW
+This Agreement is governed by the laws of the State of Delaware.
+
+IN WITNESS WHEREOF, the parties have executed this Agreement as of the date
+first written above.
+
+_____________________________          _____________________________
+Maria Chen, Northwind Consulting        David Okafor, Bramble Retail Group
