@@ -8,27 +8,27 @@ Upload documents, automatically classify and index them, then chat with your doc
 
 ## Features
 
-- PDF, DOCX, and TXT document support
-- Automatic document classification
-- Structured information extraction
-- Semantic search using vector embeddings
-- Retrieval-Augmented Generation (RAG)
-- Source-grounded answers
-- Multi-document querying
-- Clean and responsive web interface
+* PDF, DOCX, and TXT document support
+* Automatic document classification
+* Structured information extraction
+* Semantic search using vector embeddings
+* Retrieval-Augmented Generation (RAG)
+* Source-grounded answers
+* Multi-document querying
+* Clean and responsive web interface
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---------|------------|
-| Backend | FastAPI |
-| LLM | Groq |
-| Embeddings | FastEmbed (BGE Small) |
+| Layer        | Technology                |
+| ------------ | ------------------------- |
+| Backend      | FastAPI                   |
+| LLM          | Groq                      |
+| Embeddings   | FastEmbed (BGE Small)     |
 | Vector Store | In-Memory Vector Database |
-| Frontend | HTML, CSS, JavaScript |
-| Deployment | Docker |
+| Frontend     | HTML, CSS, JavaScript     |
+| Deployment   | Docker                    |
 
 ---
 
@@ -76,7 +76,7 @@ frontend/
 ## Run Locally
 
 ```bash
-git clone https://github.com/Danish-Mahdi/DocuMind-AI.git
+git clone https://github.com/Tabish-Alam/DocuMind-AI.git
 
 cd DocuMind-AI
 
@@ -99,22 +99,24 @@ Add your Groq API key, upload a document, and start asking questions.
 
 ### Example Queries
 
-- What type of document is this?
-- Summarize this document.
-- What are the key requirements?
-- Explain the implementation plan.
-- What dates or entities are mentioned?
+* What type of document is this?
+* Summarize this document.
+* What are the key requirements?
+* Explain the implementation plan.
+* What dates or entities are mentioned?
 
 ---
 
 ## Future Enhancements
 
-- Persistent vector database (ChromaDB, Qdrant, Pinecone)
-- OCR support for scanned PDFs
-- Multi-user authentication
-- Cloud deployment
-- Advanced document analytics
-- Hybrid search (keyword + semantic retrieval)
+* Persistent vector database (ChromaDB, Qdrant, Pinecone)
+* OCR support for scanned PDFs
+* Multi-user authentication
+* Cloud deployment
+* Advanced document analytics
+* Hybrid search (keyword + semantic retrieval)
 
 ---
-**Built with FastAPI, Groq, and FastEmbed**
+
+**Built by Tabish Alam with FastAPI, Groq, and FastEmbed**
+
