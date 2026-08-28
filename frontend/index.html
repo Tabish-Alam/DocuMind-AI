@@ -1,146 +1,477 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Archive — Document Intelligence &amp; RAG</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>DocuMind AI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
 <div class="app">
 
-  <!-- ============ SIDEBAR / "CATALOG" ============ -->
-  <aside class="catalog">
-    <div class="catalog__brand">
-      <div class="catalog__mark">A</div>
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="catalog">
+
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M7 3.75h7.4L18 7.35V20.25H7V3.75Z"/>
+          <path d="M14 3.75v4h4"/>
+        </svg>
+      </div>
+
       <div>
-        <div class="catalog__title">Archive</div>
-        <div class="catalog__subtitle">Document Intelligence &amp; RAG</div>
+        <h2>DocuMind <span>AI</span></h2>
+        <p>Document Intelligence</p>
       </div>
     </div>
 
-    <section class="catalog__section">
-      <!-- <label class="catalog__label">API key</label> -->
-      <!-- <div class="catalog__api-status">
-        <div class="catalog__api-status-badge">Server-side</div>
-        <p class="catalog__hint">
-          Uses the API key from your .env file on the server.
-          If the key is missing or quota is reached, the app will ask for a temporary override key.
-        </p>
-      </div> -->
-      <div id="keyStatus" class="key-status"></div>
-    </section>
+    <button
+      id="sidebarClose"
+      class="sidebar-close"
+      type="button"
+    >
+      ×
+    </button>
 
-    <section class="catalog__section">
-      <label class="catalog__label">Upload a document</label>
-      <div id="dropzone" class="dropzone">
-        <div class="dropzone__icon">⇪</div>
-        <div class="dropzone__text">Drop a PDF, DOCX or TXT here<br/>or click to browse</div>
-        <input id="fileInput" type="file" accept=".pdf,.docx,.txt,.md" hidden />
-      </div>
-      <div id="uploadProgress" class="upload-progress hidden">
-        <div class="upload-progress__bar"><span id="uploadProgressBar"></span></div>
-        <div id="uploadProgressLabel" class="upload-progress__label">Extracting…</div>
-      </div>
-    </section>
+    <!-- ENGINE STATUS -->
+    <div class="engine-status">
+      <span class="status-dot"></span>
 
-    <section class="catalog__section catalog__section--grow">
-      <div class="catalog__label-row">
-        <label class="catalog__label">Indexed documents</label>
-        <span id="docCount" class="doc-count">0</span>
-      </div>
-      <div id="docList" class="doc-list">
-        <div class="doc-list__empty">No documents yet. Upload one above to get started.</div>
-      </div>
-    </section>
-
-    <footer class="catalog__footer">
-      Local embeddings (bge-small) · API-backed classification &amp; chat
-    </footer>
-  </aside>
-
-  <!-- ============ MAIN / CHAT ============ -->
-  <main class="workspace">
-
-    <header class="workspace__header">
       <div>
-        <h1>Ask your documents</h1>
-        <p class="workspace__subtitle">Answers are grounded only in what you've uploaded, with cited sources below each reply.</p>
+        <strong>AI Workspace</strong>
+        <small>RAG engine online</small>
       </div>
-      <div class="scope-picker">
-        <label for="scopeSelect">Search in</label>
-        <select id="scopeSelect">
-          <option value="all">All documents</option>
-        </select>
-      </div>
-    </header>
 
-    <div id="chatLog" class="chat-log">
-      <div class="chat-welcome">
-        <div class="chat-welcome__stamp">RAG</div>
-        <h2>Retrieval-grounded answers, cited line by line</h2>
-        <p>Upload a document on the left, then ask a question. Every answer below traces back to the exact
-          passages it was built from — click a source card to open the excerpt.</p>
-        <div class="chat-welcome__examples">
-          <button class="example-chip" data-example="What type of document is this?">What type of document is this?</button>
-          <button class="example-chip" data-example="Summarize the key points in 3 bullets.">Summarize the key points</button>
-          <button class="example-chip" data-example="What dates, amounts or names are mentioned?">Find dates, amounts or names</button>
+      <span class="live-pill">Live</span>
+    </div>
+
+    <!-- UPLOAD -->
+    <section class="sidebar-section">
+
+      <div class="section-title">
+        <span>KNOWLEDGE</span>
+        <h3>Add a document</h3>
+      </div>
+
+      <div
+        id="dropzone"
+        class="upload-box"
+        tabindex="0"
+      >
+
+        <div class="upload-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 16V5"/>
+            <path d="M8.5 8.5 12 5l3.5 3.5"/>
+            <path d="M5 15.5v2.75A1.75 1.75 0 0 0 6.75 20h10.5A1.75 1.75 0 0 0 19 18.25V15.5"/>
+          </svg>
+        </div>
+
+        <strong>Upload your document</strong>
+
+        <p>
+          Drag & drop a file here or
+          <span>browse</span>
+        </p>
+
+        <small>PDF · DOCX · TXT · MD</small>
+
+        <input
+          id="fileInput"
+          type="file"
+          accept=".pdf,.docx,.txt,.md"
+          hidden
+        />
+
+      </div>
+
+      <div
+        id="uploadProgress"
+        class="upload-progress hidden"
+      >
+        <div class="upload-progress-top">
+          <span id="uploadProgressLabel">
+            Processing document...
+          </span>
+        </div>
+
+        <div class="progress-track">
+          <span id="uploadProgressBar"></span>
         </div>
       </div>
+
+      <div id="keyStatus"></div>
+
+    </section>
+
+    <!-- DOCUMENTS -->
+    <section class="sidebar-section documents-section">
+
+      <div class="documents-heading">
+
+        <div>
+          <span class="small-label">
+            KNOWLEDGE BASE
+          </span>
+
+          <h3>Your documents</h3>
+        </div>
+
+        <span
+          id="docCount"
+          class="document-count"
+        >
+          0
+        </span>
+
+      </div>
+
+      <div id="docList" class="doc-list">
+
+        <div class="empty-documents">
+          <div class="empty-icon">+</div>
+
+          <strong>No documents yet</strong>
+
+          <p>
+            Upload a document to start
+            building your knowledge base.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="sidebar-bottom">
+      <span>●</span>
+
+      <div>
+        <strong>Private workspace</strong>
+        <small>Your answers stay grounded in your files.</small>
+      </div>
     </div>
 
-    <form id="chatForm" class="chat-input-bar">
-      <input id="chatInput" type="text" placeholder="Ask a question about your documents…" autocomplete="off" />
-      <button id="chatSend" type="submit">
-        <span>Ask</span>
-      </button>
-    </form>
+  </aside>
+
+
+  <div id="mobileOverlay" class="mobile-overlay"></div>
+
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HEADER -->
+    <header class="topbar">
+
+      <div class="topbar-left">
+
+        <button
+          id="mobileMenu"
+          class="mobile-menu"
+          type="button"
+        >
+          ☰
+        </button>
+
+        <div>
+          <span class="page-eyebrow">
+            AI DOCUMENT ASSISTANT
+          </span>
+
+          <h1>Chat with your documents</h1>
+
+          <p>
+            Ask questions and get answers backed
+            by your uploaded knowledge.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="scope-control">
+
+        <label>Search scope</label>
+
+        <div class="scope-select">
+          <span>⌕</span>
+
+          <select id="scopeSelect">
+            <option value="all">
+              All documents
+            </option>
+          </select>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- CHAT -->
+    <section class="chat">
+
+      <div
+        id="chatLog"
+        class="chat-log"
+      >
+
+        <!-- EMPTY STATE -->
+        <div class="chat-welcome">
+
+          <div class="ai-orb">
+            ✦
+          </div>
+
+          <div class="rag-badge">
+            RAG POWERED
+          </div>
+
+          <h2>
+            Turn documents into answers.
+          </h2>
+
+          <p class="welcome-description">
+            Upload documents and ask anything.
+            DocuMind retrieves the most relevant
+            information and generates answers
+            grounded directly in your files.
+          </p>
+
+
+          <div class="suggestions">
+
+            <button
+              class="example-chip"
+              data-example="Summarize the key points in 3 bullets."
+              type="button"
+            >
+              <span class="suggestion-icon">≡</span>
+
+              <div>
+                <strong>Summarize</strong>
+                <small>Extract important points</small>
+              </div>
+
+              <span class="arrow">→</span>
+            </button>
+
+
+            <button
+              class="example-chip"
+              data-example="What type of document is this?"
+              type="button"
+            >
+              <span class="suggestion-icon">?</span>
+
+              <div>
+                <strong>Understand</strong>
+                <small>Explain this document</small>
+              </div>
+
+              <span class="arrow">→</span>
+            </button>
+
+
+            <button
+              class="example-chip"
+              data-example="What dates, amounts or names are mentioned?"
+              type="button"
+            >
+              <span class="suggestion-icon">⌕</span>
+
+              <div>
+                <strong>Extract</strong>
+                <small>Find names, dates & amounts</small>
+              </div>
+
+              <span class="arrow">→</span>
+            </button>
+
+          </div>
+
+
+          <div class="feature-row">
+            <span>● Context-aware</span>
+            <span>● Source grounded</span>
+            <span>● Semantic search</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- COMPOSER -->
+      <div class="composer-area">
+
+        <form
+          id="chatForm"
+          class="composer"
+        >
+
+          <span class="composer-ai-icon">
+            ✦
+          </span>
+
+          <input
+            id="chatInput"
+            type="text"
+            placeholder="Ask anything about your documents..."
+            autocomplete="off"
+          />
+
+          <button
+            id="chatSend"
+            type="submit"
+          >
+            Ask AI
+            <span>→</span>
+          </button>
+
+        </form>
+
+        <p class="composer-note">
+          AI-generated answers may contain mistakes.
+          Verify important information using the cited sources.
+        </p>
+
+      </div>
+
+    </section>
+
   </main>
 
 </div>
 
+
+<!-- SOURCE CARD -->
 <template id="sourceCardTemplate">
-  <button class="source-card" type="button">
-    <div class="source-card__index"></div>
-    <div class="source-card__body">
-      <div class="source-card__filename"></div>
-      <div class="source-card__snippet"></div>
+
+  <button
+    class="source-card"
+    type="button"
+  >
+
+    <div class="source-card-top">
+
+      <span class="source-card__index">
+        1
+      </span>
+
+      <span class="source-card__filename">
+        Document
+      </span>
+
     </div>
-    <div class="source-card__score"></div>
+
+    <p class="source-card__snippet"></p>
+
+    <div class="source-card-bottom">
+      Relevance
+      <span class="source-card__score"></span>
+    </div>
+
   </button>
+
 </template>
 
-<div id="excerptModal" class="modal hidden">
+
+<!-- EXCERPT MODAL -->
+<div
+  id="excerptModal"
+  class="modal hidden"
+>
+
   <div class="modal__backdrop"></div>
-  <div class="modal__panel">
-    <button id="excerptModalClose" class="modal__close" type="button">×</button>
-    <div id="excerptModalTitle" class="modal__title"></div>
-    <div id="excerptModalBody" class="modal__body"></div>
+
+  <div class="modal-content">
+
+    <button
+      id="excerptModalClose"
+      class="modal-close"
+      type="button"
+    >
+      ×
+    </button>
+
+    <span class="modal-label">
+      SOURCE
+    </span>
+
+    <h3 id="excerptModalTitle">
+      Source
+    </h3>
+
+    <p id="excerptModalBody"></p>
+
   </div>
+
 </div>
 
-<div id="apiKeyModal" class="modal hidden">
+
+<!-- API KEY MODAL -->
+<div
+  id="apiKeyModal"
+  class="modal hidden"
+>
+
   <div class="modal__backdrop"></div>
-  <div class="modal__panel modal__panel--compact">
-    <button id="apiKeyModalClose" class="modal__close" type="button">×</button>
-    <div class="modal__title">Missing API key</div>
-    <p id="apiKeyModalMessage" class="modal__body modal__body--tight">
-      Enter a new API key to continue.
+
+  <div class="modal-content api-modal">
+
+    <button
+      id="apiKeyModalClose"
+      class="modal-close"
+      type="button"
+    >
+      ×
+    </button>
+
+    <span class="modal-label">
+      GROQ API
+    </span>
+
+    <h3>Connect Groq</h3>
+
+    <p id="apiKeyModalMessage">
+      Enter your Groq API key.
     </p>
-    <form id="apiKeyModalForm" class="api-key-form">
-      <input id="apiKeyModalInput" type="password" placeholder="gsk_..." autocomplete="off" spellcheck="false" />
-      <div class="api-key-form__actions">
-        <button id="apiKeyModalCancel" class="secondary-btn" type="button">Cancel</button>
-        <button class="primary-btn" type="submit">Use key</button>
-      </div>
-    </form>
+
+    <input
+      id="apiKeyInput"
+      type="password"
+      placeholder="gsk_..."
+    />
+
+    <button
+      id="apiKeySave"
+      class="primary-button"
+      type="button"
+    >
+      Save API Key
+    </button>
+
   </div>
+
 </div>
+
 
 <script src="app.js"></script>
+
 </body>
 </html>
