@@ -22,72 +22,80 @@
 <div class="app">
 
   <!-- SIDEBAR -->
-  <aside class="sidebar" id="catalog">
+  <aside class="catalog">
 
-    <div class="brand">
-      <div class="brand-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M7 3.75h7.4L18 7.35V20.25H7V3.75Z"/>
-          <path d="M14 3.75v4h4"/>
-        </svg>
+    <div class="catalog__brand">
+      <div class="catalog__mark">
+        ✦
       </div>
 
       <div>
-        <h2>DocuMind <span>AI</span></h2>
-        <p>Document Intelligence</p>
+        <div class="catalog__title">
+          DocuMind <span>AI</span>
+        </div>
+
+        <div class="catalog__subtitle">
+          Intelligent document workspace
+        </div>
       </div>
     </div>
 
-    <button
-      id="sidebarClose"
-      class="sidebar-close"
-      type="button"
-    >
-      ×
-    </button>
 
-    <!-- ENGINE STATUS -->
-    <div class="engine-status">
-      <span class="status-dot"></span>
+    <!-- STATUS -->
+    <div class="workspace-status">
+      <div class="workspace-status__dot"></div>
 
-      <div>
-        <strong>AI Workspace</strong>
-        <small>RAG engine online</small>
+      <div class="workspace-status__copy">
+        <strong>AI workspace</strong>
+        <span>RAG engine active</span>
       </div>
 
-      <span class="live-pill">Live</span>
+      <div class="workspace-status__badge">
+        LIVE
+      </div>
     </div>
+
+
+    <!-- KEY STATUS -->
+    <section class="catalog__section catalog__section--status">
+      <div id="keyStatus" class="key-status"></div>
+    </section>
+
 
     <!-- UPLOAD -->
-    <section class="sidebar-section">
+    <section class="catalog__section">
 
-      <div class="section-title">
-        <span>KNOWLEDGE</span>
-        <h3>Add a document</h3>
+      <div class="catalog__heading">
+        <span class="catalog__eyebrow">
+          KNOWLEDGE
+        </span>
+
+        <h3>Add document</h3>
       </div>
 
-      <div
-        id="dropzone"
-        class="upload-box"
-        tabindex="0"
-      >
+      <div id="dropzone" class="dropzone">
 
-        <div class="upload-icon">
-          <svg viewBox="0 0 24 24">
+        <div class="dropzone__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 16V5"/>
             <path d="M8.5 8.5 12 5l3.5 3.5"/>
             <path d="M5 15.5v2.75A1.75 1.75 0 0 0 6.75 20h10.5A1.75 1.75 0 0 0 19 18.25V15.5"/>
           </svg>
         </div>
 
-        <strong>Upload your document</strong>
+        <strong>
+          Upload a document
+        </strong>
 
-        <p>
-          Drag & drop a file here or
-          <span>browse</span>
-        </p>
+        <div class="dropzone__text">
+          Drag & drop your file here
+          <br>
+          or <span>click to browse</span>
+        </div>
 
-        <small>PDF · DOCX · TXT · MD</small>
+        <div class="dropzone__types">
+          PDF · DOCX · TXT · MD
+        </div>
 
         <input
           id="fileInput"
@@ -95,126 +103,111 @@
           accept=".pdf,.docx,.txt,.md"
           hidden
         />
-
       </div>
 
-      <div
-        id="uploadProgress"
-        class="upload-progress hidden"
-      >
-        <div class="upload-progress-top">
-          <span id="uploadProgressLabel">
-            Processing document...
-          </span>
+
+      <div id="uploadProgress" class="upload-progress hidden">
+
+        <div class="upload-progress__label" id="uploadProgressLabel">
+          Processing document...
         </div>
 
-        <div class="progress-track">
+        <div class="upload-progress__bar">
           <span id="uploadProgressBar"></span>
         </div>
-      </div>
 
-      <div id="keyStatus"></div>
+      </div>
 
     </section>
 
-    <!-- DOCUMENTS -->
-    <section class="sidebar-section documents-section">
 
-      <div class="documents-heading">
+    <!-- DOCUMENTS -->
+    <section class="catalog__section catalog__section--grow">
+
+      <div class="catalog__label-row">
 
         <div>
-          <span class="small-label">
+          <span class="catalog__eyebrow">
             KNOWLEDGE BASE
           </span>
 
           <h3>Your documents</h3>
         </div>
 
-        <span
-          id="docCount"
-          class="document-count"
-        >
+        <span id="docCount" class="doc-count">
           0
         </span>
 
       </div>
 
+
       <div id="docList" class="doc-list">
-
-        <div class="empty-documents">
-          <div class="empty-icon">+</div>
-
-          <strong>No documents yet</strong>
-
-          <p>
-            Upload a document to start
-            building your knowledge base.
-          </p>
+        <div class="doc-list__empty">
+          No documents yet. Upload one above to get started.
         </div>
-
       </div>
 
     </section>
 
-    <div class="sidebar-bottom">
-      <span>●</span>
+
+    <footer class="catalog__footer">
+
+      <span class="catalog__footer-dot"></span>
 
       <div>
-        <strong>Private workspace</strong>
-        <small>Your answers stay grounded in your files.</small>
+        <strong>Grounded AI</strong>
+        <small>
+          Answers are generated from your documents.
+        </small>
       </div>
-    </div>
+
+    </footer>
 
   </aside>
 
 
-  <div id="mobileOverlay" class="mobile-overlay"></div>
-
-
   <!-- MAIN -->
-  <main class="main">
+  <main class="workspace">
 
     <!-- HEADER -->
-    <header class="topbar">
+    <header class="workspace__header">
 
-      <div class="topbar-left">
+      <div class="workspace__heading">
 
-        <button
-          id="mobileMenu"
-          class="mobile-menu"
-          type="button"
-        >
-          ☰
-        </button>
+        <span class="workspace__eyebrow">
+          DOCUMENT INTELLIGENCE
+        </span>
 
-        <div>
-          <span class="page-eyebrow">
-            AI DOCUMENT ASSISTANT
-          </span>
+        <h1>
+          Chat with your documents
+        </h1>
 
-          <h1>Chat with your documents</h1>
-
-          <p>
-            Ask questions and get answers backed
-            by your uploaded knowledge.
-          </p>
-        </div>
+        <p class="workspace__subtitle">
+          Ask questions, retrieve information and generate answers grounded in your uploaded knowledge.
+        </p>
 
       </div>
 
 
-      <div class="scope-control">
+      <div class="scope-picker">
 
-        <label>Search scope</label>
+        <label for="scopeSelect">
+          Search scope
+        </label>
 
-        <div class="scope-select">
-          <span>⌕</span>
+        <div class="scope-picker__control">
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6"/>
+            <path d="m16 16 4 4"/>
+          </svg>
 
           <select id="scopeSelect">
             <option value="all">
               All documents
             </option>
           </select>
+
         </div>
 
       </div>
@@ -222,202 +215,187 @@
     </header>
 
 
-    <!-- CHAT -->
-    <section class="chat">
+    <!-- CHAT LOG -->
+    <div id="chatLog" class="chat-log">
 
-      <div
-        id="chatLog"
-        class="chat-log"
-      >
+      <div class="chat-welcome">
 
-        <!-- EMPTY STATE -->
-        <div class="chat-welcome">
+        <div class="chat-welcome__icon">
+          ✦
+        </div>
 
-          <div class="ai-orb">
-            ✦
-          </div>
+        <div class="chat-welcome__stamp">
+          RAG POWERED
+        </div>
 
-          <div class="rag-badge">
-            RAG POWERED
-          </div>
+        <h2>
+          Turn your documents into answers.
+        </h2>
 
-          <h2>
-            Turn documents into answers.
-          </h2>
-
-          <p class="welcome-description">
-            Upload documents and ask anything.
-            DocuMind retrieves the most relevant
-            information and generates answers
-            grounded directly in your files.
-          </p>
+        <p>
+          Upload your documents and ask anything. DocuMind finds the most relevant passages and generates answers based on your files.
+        </p>
 
 
-          <div class="suggestions">
+        <div class="chat-welcome__examples">
 
-            <button
-              class="example-chip"
-              data-example="Summarize the key points in 3 bullets."
-              type="button"
-            >
-              <span class="suggestion-icon">≡</span>
+          <button
+            class="example-chip"
+            data-example="Summarize the key points in 3 bullets."
+            type="button"
+          >
+            <div class="example-chip__icon">
+              ≡
+            </div>
 
-              <div>
-                <strong>Summarize</strong>
-                <small>Extract important points</small>
-              </div>
+            <div class="example-chip__content">
+              <strong>Summarize</strong>
+              <span>Extract the key points</span>
+            </div>
 
-              <span class="arrow">→</span>
-            </button>
-
-
-            <button
-              class="example-chip"
-              data-example="What type of document is this?"
-              type="button"
-            >
-              <span class="suggestion-icon">?</span>
-
-              <div>
-                <strong>Understand</strong>
-                <small>Explain this document</small>
-              </div>
-
-              <span class="arrow">→</span>
-            </button>
+            <div class="example-chip__arrow">
+              →
+            </div>
+          </button>
 
 
-            <button
-              class="example-chip"
-              data-example="What dates, amounts or names are mentioned?"
-              type="button"
-            >
-              <span class="suggestion-icon">⌕</span>
+          <button
+            class="example-chip"
+            data-example="What type of document is this?"
+            type="button"
+          >
+            <div class="example-chip__icon">
+              ?
+            </div>
 
-              <div>
-                <strong>Extract</strong>
-                <small>Find names, dates & amounts</small>
-              </div>
+            <div class="example-chip__content">
+              <strong>Understand</strong>
+              <span>Explain this document</span>
+            </div>
 
-              <span class="arrow">→</span>
-            </button>
+            <div class="example-chip__arrow">
+              →
+            </div>
+          </button>
 
-          </div>
+
+          <button
+            class="example-chip"
+            data-example="What dates, amounts or names are mentioned?"
+            type="button"
+          >
+            <div class="example-chip__icon">
+              ⌕
+            </div>
+
+            <div class="example-chip__content">
+              <strong>Extract</strong>
+              <span>Find names, dates and amounts</span>
+            </div>
+
+            <div class="example-chip__arrow">
+              →
+            </div>
+          </button>
+
+        </div>
 
 
-          <div class="feature-row">
-            <span>● Context-aware</span>
-            <span>● Source grounded</span>
-            <span>● Semantic search</span>
-          </div>
-
+        <div class="chat-welcome__features">
+          <span>● Context-aware</span>
+          <span>● Source-grounded</span>
+          <span>● Semantic search</span>
         </div>
 
       </div>
 
+    </div>
 
-      <!-- COMPOSER -->
-      <div class="composer-area">
 
-        <form
-          id="chatForm"
-          class="composer"
-        >
+    <!-- CHAT COMPOSER -->
+    <div class="chat-composer-wrap">
 
-          <span class="composer-ai-icon">
-            ✦
-          </span>
+      <form id="chatForm" class="chat-input-bar">
 
-          <input
-            id="chatInput"
-            type="text"
-            placeholder="Ask anything about your documents..."
-            autocomplete="off"
-          />
+        <div class="chat-input-bar__icon">
+          ✦
+        </div>
 
-          <button
-            id="chatSend"
-            type="submit"
-          >
-            Ask AI
-            <span>→</span>
-          </button>
+        <input
+          id="chatInput"
+          type="text"
+          placeholder="Ask anything about your documents..."
+          autocomplete="off"
+        />
 
-        </form>
+        <button id="chatSend" type="submit">
+          <span>Ask AI</span>
+          <strong>→</strong>
+        </button>
 
-        <p class="composer-note">
-          AI-generated answers may contain mistakes.
-          Verify important information using the cited sources.
-        </p>
+      </form>
 
+      <div class="chat-composer-note">
+        AI-generated responses may contain mistakes. Verify important information with the cited sources.
       </div>
 
-    </section>
+    </div>
 
   </main>
 
 </div>
 
 
-<!-- SOURCE CARD -->
+<!-- SOURCE CARD TEMPLATE -->
 <template id="sourceCardTemplate">
 
-  <button
-    class="source-card"
-    type="button"
-  >
+  <button class="source-card" type="button">
 
-    <div class="source-card-top">
+    <div class="source-card__index"></div>
 
-      <span class="source-card__index">
-        1
-      </span>
+    <div class="source-card__body">
 
-      <span class="source-card__filename">
-        Document
-      </span>
+      <div class="source-card__filename"></div>
+
+      <div class="source-card__snippet"></div>
 
     </div>
 
-    <p class="source-card__snippet"></p>
-
-    <div class="source-card-bottom">
-      Relevance
-      <span class="source-card__score"></span>
-    </div>
+    <div class="source-card__score"></div>
 
   </button>
 
 </template>
 
 
-<!-- EXCERPT MODAL -->
-<div
-  id="excerptModal"
-  class="modal hidden"
->
+<!-- SOURCE MODAL -->
+<div id="excerptModal" class="modal hidden">
 
   <div class="modal__backdrop"></div>
 
-  <div class="modal-content">
+  <div class="modal__panel">
 
     <button
       id="excerptModalClose"
-      class="modal-close"
+      class="modal__close"
       type="button"
     >
       ×
     </button>
 
-    <span class="modal-label">
-      SOURCE
-    </span>
+    <div class="modal__eyebrow">
+      SOURCE EXCERPT
+    </div>
 
-    <h3 id="excerptModalTitle">
-      Source
-    </h3>
+    <div
+      id="excerptModalTitle"
+      class="modal__title"
+    ></div>
 
-    <p id="excerptModalBody"></p>
+    <div
+      id="excerptModalBody"
+      class="modal__body"
+    ></div>
 
   </div>
 
@@ -425,46 +403,69 @@
 
 
 <!-- API KEY MODAL -->
-<div
-  id="apiKeyModal"
-  class="modal hidden"
->
+<div id="apiKeyModal" class="modal hidden">
 
   <div class="modal__backdrop"></div>
 
-  <div class="modal-content api-modal">
+  <div class="modal__panel modal__panel--compact">
 
     <button
       id="apiKeyModalClose"
-      class="modal-close"
+      class="modal__close"
       type="button"
     >
       ×
     </button>
 
-    <span class="modal-label">
+    <div class="modal__eyebrow">
       GROQ API
-    </span>
+    </div>
 
-    <h3>Connect Groq</h3>
+    <div class="modal__title">
+      Connect API key
+    </div>
 
-    <p id="apiKeyModalMessage">
-      Enter your Groq API key.
+    <p
+      id="apiKeyModalMessage"
+      class="modal__body modal__body--tight"
+    >
+      Enter a new API key to continue.
     </p>
 
-    <input
-      id="apiKeyInput"
-      type="password"
-      placeholder="gsk_..."
-    />
 
-    <button
-      id="apiKeySave"
-      class="primary-button"
-      type="button"
+    <form
+      id="apiKeyModalForm"
+      class="api-key-form"
     >
-      Save API Key
-    </button>
+
+      <input
+        id="apiKeyModalInput"
+        type="password"
+        placeholder="gsk_..."
+        autocomplete="off"
+        spellcheck="false"
+      />
+
+      <div class="api-key-form__actions">
+
+        <button
+          id="apiKeyModalCancel"
+          class="secondary-btn"
+          type="button"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="primary-btn"
+          type="submit"
+        >
+          Use key
+        </button>
+
+      </div>
+
+    </form>
 
   </div>
 
